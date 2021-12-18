@@ -1,3 +1,16 @@
+### Eclipse ###
+.settings/
+target/
+
+# Java annotation processor (APT)
+.factorypath
+
+# JDT-specific (Eclipse Java Development Tools)     
+.classpath
+
+# Eclipse Core      
+.project
+
 # Compiled class file
 *.class
 
