@@ -3,6 +3,7 @@ package com.acme.workorderapi.service;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class WorkOrderServiceImpl implements WorkOrderService {
 		return this.workOrderRepository.getPrioritisedWorkOrders()
 				.stream()
 				.map(WorkOrderEntity::getId)
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	@Override
