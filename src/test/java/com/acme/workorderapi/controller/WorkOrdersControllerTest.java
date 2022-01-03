@@ -177,16 +177,14 @@ class WorkOrdersControllerTest {
 	void givenGetById_whenExists_shouldReturnOkAndWorkOrder() throws Exception {
 		LocalDateTime timeAdded = LocalDateTime.now();
 		WorkOrderEntity expected = TestUtils.createWorkOrderEntity(1, timeAdded);
-		expected.setRank(1.0);
 		given(workOrderQueueService.getById(1L)).willReturn(expected);
 
 		mockMvc.perform(get(TestConstants.WORK_ORDER_URL, 1)
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk())
 		.andExpect(jsonPath("requestorId").value(1))
-		.andExpect(jsonPath("timeAdded").value(timeAdded.toString()))
-		.andExpect(jsonPath("type").value(ClassificationType.NORMAL.name()))
-		.andExpect(jsonPath("rank").value(1.0));
+		.andExpect(jsonPath("timeAdded").value(timeAdded.toString().replaceAll("0$", "")))
+		.andExpect(jsonPath("type").value(ClassificationType.NORMAL.name()));
 	}
 	
 	@Test
