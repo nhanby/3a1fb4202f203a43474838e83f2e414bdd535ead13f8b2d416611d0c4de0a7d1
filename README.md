@@ -35,7 +35,7 @@ or
 
 mvn spring-boot:run
 ```
-4. Check the stdout or boot_example.log file to make sure no exceptions are thrown
+4. Check the stdout to make sure no exceptions are thrown
 
 ### REST APIs Endpoints
 
