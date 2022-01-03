@@ -1,13 +1,13 @@
-package com.acme.workorderservice;
+package com.acme.workorderapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WorkOrderServiceApplication {
+public class WorkOrderApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WorkOrderServiceApplication.class, args);
+		SpringApplication.run(WorkOrderApiApplication.class, args);
 	}
-
+	
 }
