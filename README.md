@@ -36,45 +36,6 @@ or
 4. Check the stdout or boot_example.log file to make sure no exceptions are thrown
 
 ### REST APIs Endpoints
-#### Create a hotel resource
-```
-POST /example/v1/hotels
-Accept: application/json
-Content-Type: application/json
 
-{
-"name" : "Beds R Us",
-"description" : "Very basic, small rooms but clean",
-"city" : "Santa Ana",
-"rating" : 2
-}
-
-RESPONSE: HTTP 201 (Created)
-Location header: http://localhost:8090/example/v1/hotels/1
-```
-
-#### Retrieve a paginated list of hotels
-```
-http://localhost:8090/example/v1/hotels?page=0&size=10
-
-Response: HTTP 200
-Content: paginated list 
-```
-#### Update a hotel resource
-```
-PUT /example/v1/hotels/1
-Accept: application/json
-Content-Type: application/json
-
-{
-"name" : "Beds R Us",
-"description" : "Very basic, small rooms but clean",
-"city" : "Santa Ana",
-"rating" : 3
-}
-
-RESPONSE: HTTP 204 (No Content)
-```
 #### To view Swagger 2 API docs
 Run the server and browse to localhost:8090/swagger-ui.html
-```
