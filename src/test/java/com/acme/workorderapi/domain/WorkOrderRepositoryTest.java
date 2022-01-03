@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,7 +122,7 @@ class WorkOrderRepositoryTest {
 		Collection<WorkOrderEntity> prioritisedWorkOrders = this.woRepository.getPrioritisedWorkOrders();
 		assertThat(prioritisedWorkOrders).isNotEmpty();
 		
-		List<Long> prioritisedWorkOrderIds = prioritisedWorkOrders.stream().map(x -> x.getId()).toList();
+		List<Long> prioritisedWorkOrderIds = prioritisedWorkOrders.stream().map(x -> x.getId()).collect(Collectors.toList());
  		assertThat(prioritisedWorkOrderIds).containsExactly(30L, 15L, 10L, 5L, 6L, 3L, 2L, 1L);
 	}
 	
