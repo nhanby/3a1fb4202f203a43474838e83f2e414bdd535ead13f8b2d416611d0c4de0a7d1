@@ -106,8 +106,7 @@ class WorkOrderServiceImplTest {
 	
 	@Test
 	void getPositionById_whenExists_shouldReturnRetrievedWorkOrder() {
-		WorkOrderEntity expectedWorkOrder = TestUtils.createWorkOrderEntity(1,LocalDateTime.now());
-		expectedWorkOrder.setPosition(2);
+		WorkOrderEntity expectedWorkOrder = TestUtils.createWorkOrderEntity(1,LocalDateTime.now(), 2);
 		given(workOrderRepository.getWorkOrderById(1L)).willReturn(Optional.of(expectedWorkOrder));
 		int position = this.workOrderService.getPositionById(1L);
 		assertThat(position).isEqualTo(2);		

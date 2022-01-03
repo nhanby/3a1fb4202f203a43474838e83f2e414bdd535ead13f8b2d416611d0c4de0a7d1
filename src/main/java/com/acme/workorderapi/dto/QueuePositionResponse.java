@@ -1,12 +1,12 @@
 package com.acme.workorderapi.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
 public class QueuePositionResponse {
 	private int position;
 }

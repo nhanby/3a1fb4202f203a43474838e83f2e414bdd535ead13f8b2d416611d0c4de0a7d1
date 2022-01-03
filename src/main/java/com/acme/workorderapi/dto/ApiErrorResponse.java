@@ -9,12 +9,12 @@ import org.springframework.validation.ObjectError;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @JsonInclude(Include.NON_NULL)
 public class ApiErrorResponse {
-	
+
 	private String message;
 	private List<ApiValidationError> details;
 

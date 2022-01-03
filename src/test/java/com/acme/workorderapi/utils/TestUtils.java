@@ -10,4 +10,7 @@ public class TestUtils {
 		return new WorkOrderEntity(requestorId, timeAdded);
 	}
 
+	public static WorkOrderEntity createWorkOrderEntity(long requestorId, LocalDateTime timeAdded, int position) {
+		return new WorkOrderEntity(requestorId, timeAdded, position);
+	}
 }

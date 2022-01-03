@@ -7,15 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.Getter;
 
 @Entity
 @Table(name = "WORKORDER")
-@Data
+@Getter
 @EqualsAndHashCode
-@ToString
 @NamedNativeQuery(name = "WorkOrderEntity.getHighestPriorityWorkOrder", query = WorkOrderEntity.GET_HIGHEST_PRIORITY_WORK_ORDER_SQL, resultClass = WorkOrderEntity.class)
 @NamedNativeQuery(name = "WorkOrderEntity.getPrioritisedWorkOrders", query = WorkOrderEntity.GET_PRIORITISED_WORK_ORDERS_SQL, resultClass = WorkOrderEntity.class)
 @NamedNativeQuery(name = "WorkOrderEntity.getWorkOrderById", query = WorkOrderEntity.GET_WORK_ORDER_SQL, resultClass = WorkOrderEntity.class)
@@ -55,6 +53,13 @@ public class WorkOrderEntity {
 		this.id = id;
 		this.timeAdded = timeAdded;
 		this.classification = getClassificationType(id);
+	}
+	
+	public WorkOrderEntity(Long id, LocalDateTime timeAdded, Integer position) {
+		this.id = id;
+		this.timeAdded = timeAdded;
+		this.classification = getClassificationType(id);
+		this.position = position;
 	}
 
 	private ClassificationType getClassificationType(Long id) {

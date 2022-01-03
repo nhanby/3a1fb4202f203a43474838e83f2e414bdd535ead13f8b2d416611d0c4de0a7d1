@@ -1,10 +1,10 @@
 package com.acme.workorderapi.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
 @AllArgsConstructor
-@Data
+@Getter
 public class AverageWaitTimeResponse {
 	private Long averageWaitTime;
 }
