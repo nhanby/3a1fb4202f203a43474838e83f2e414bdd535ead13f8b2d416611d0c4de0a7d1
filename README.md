@@ -57,7 +57,7 @@ Content-Type: application/json
 ```
 ### Dequeue service request
 Endpoint for dequeuing the next highest priority service request from the Queue
-Sample Request
+####Sample Request
 ```
 POST /api/v1/workorders/dequeue
 Accept: application/json
