@@ -2,7 +2,7 @@
 
 # SERVICE REQUEST PRIORITY QUEUING SERVICE 
 ### Getting Started
-This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier was implemented using an embedded H2 in-memory database, therefore submitted service request data won't be persisted across application restarts. 
+This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier was implemented using an embedded H2 in-memory database, therefore submitted service request data won't be persisted across application restarts. The application supports only https requests running on port 8443 and configured with a self signed certificate (localhost). Depending on the test client being used this certificate will either need to be accepted on an exception basis or else added as a trusted certificate in the client/system truststore. 
 
 ### Prerequisites
 * Git client
@@ -30,6 +30,7 @@ mvn spring-boot:run
 2022-01-04 12:28:49.507  INFO 2209 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8443 (https) with context path ''
 2022-01-04 12:28:49.515  INFO 2209 --- [  restartedMain] c.a.w.WorkOrderApiApplication            : Started WorkOrderApiApplication in 8.305 seconds (JVM running for 8.639)
 ```
+6. If required, add self-signed certificate as a trusted certificate in your test client of choice (Postman, Insomnia, curl, etc)
 ## PROJECT SUMMARY
 This project is a implementation of a restful priority queuing service, which prioritizes submitted service requests based on the different ranking formulas associated with each of the service request classification types. Submitted requests are classified according to the below classification rules.
 
