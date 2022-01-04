@@ -51,7 +51,7 @@ The priority queue is sorted based on different ranking formulas associated with
 |        Management            |       # secs in queue       |
 ## REST APIs Endpoints
 ### Enqueue
-Endpoint for submitting a new service request onto the Queue
+Endpoint for submitting a new service request onto the Queue. The format of the submitted requests timeAdded field value is of the form "yyyy-MM-ddTHH:mm:ss".
 #### Sample Request
 ```
 POST /api/v1/workorders/enqueue
@@ -111,7 +111,7 @@ Content-Type: application/json
 Endpoint for getting the position of a service request with a given requestorId in the queue 
 #### Request
 ```
-GET /api/v1/workorders/position/6
+GET /api/v1/workorders/position/{requestorId}
 Accept: application/json
 ```
 #### Response
@@ -127,7 +127,7 @@ Content-Type: application/json
 Endpoint for deleting a service request with a given requestorId from the queue 
 #### Request
 ```
-DELETE /api/v1/workorders/6
+DELETE /api/v1/workorders/{requestorId}
 Accept: application/json
 ```
 #### Response
@@ -135,10 +135,10 @@ Accept: application/json
 HTTP/1.1 204
 ```
 ### Get Average Wait Time
-Endpoint which calculates the average (mean) wait time that service requests have been waiting in the queue based on a given currentTime value.
+Endpoint which calculates the average (mean) wait time that service requests have been waiting in the queue based on a given currentTime value. The format of the supplied currentTime path variable should be of the form "yyyy-MM-ddTHH:mm:ss".
 #### Request
 ```
-GET /api/v1/workorders/avgWaitTime/2021-12-29T17:03:45
+GET /api/v1/workorders/avgWaitTime/{currentTime}
 Accept: application/json
 ```
 #### Response
