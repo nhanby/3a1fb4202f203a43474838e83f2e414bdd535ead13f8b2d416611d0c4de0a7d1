@@ -1,23 +1,23 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
-# WORK ORDER API SERVICE 
-This project is a implementation of a Restful queuing service, which prioritizes submitted service requests based on ranking formulas associated with each of the different service request classification types. Submitted work orders are classified using the below classification rules.
+# SERVICE REQUEST API SERVICE 
+This project is a implementation of a Restful queuing service, which prioritizes submitted service requests based on ranking formulas associated with each of the different service request classification types. Submitted requests are classified using the below classification rules.
 
 |    Classification Type      |     Rule     |
 | ---------------------------- | --------------------------- |
-|         Priority             |          ids % by 3         |
-|           VIP                |          ids % by 5         |
-|      Management Override     |       ids % by 3 and 5      |
-|          Normal              |       ids !% by 3 or 5      |
+|          Normal              |  not evenly divisible by 3 or 5  |
+|         Priority             |     evenly divisible by 3        |
+|           VIP                |     evenly divisible by 5        |
+|        Management            |   evenly divisible by 3 and 5    |
 
-The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Management override requests will be ranked ahead of all non management override requests and are ranked amongst themselves according to the number of seconds in the queue.
+The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Management requests will be ranked ahead of all non management override requests and are ranked amongst themselves according to the number of seconds in the queue.
 
 |    Classification Type      |       Formula       |
 | ---------------------------- | --------------------------- |
 |          Normal              |       # secs in queue       |
-|         Priority             |        max(3, n * ln(n))    
+|         Priority             |        max(3, n * ln(n))    |
 |           VIP                |        max(4, 2n * ln(n))   |
-|    Management Override       |       # secs in queue       |
+|        Management            |       # secs in queue       |
 
 ## Getting Started
 This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
