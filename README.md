@@ -59,9 +59,9 @@ Content-Type: application/json
 #### Sample Response
 ```
 {
-	"requestorId": 6,
-	"timeAdded": "2021-12-29T17:03:45",
-	"type": "PRIORITY"
+   "requestorId": 6,
+   "timeAdded": "2021-12-29T17:03:45",
+   "type": "PRIORITY"
 }
 ```
 ### Dequeue service request
@@ -74,10 +74,10 @@ Accept: application/json
 #### Sample Response
 ```
 {
-	"requestorId": 9,
-	"timeAdded": "2022-01-01T23:30:38.426389",
-	"type": "PRIORITY",
-	"rank": 3986.4260763842653
+   "requestorId": 9,
+   "timeAdded": "2022-01-01T23:30:38.426389",
+   "type": "PRIORITY",
+   "rank": 3986.4260763842653
 }
 ```
 ### List Service Request Ids
