@@ -1,7 +1,7 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
 # SERVICE REQUEST PRIORITY QUEUING SERVICE 
-This project is a implementation of a restful queuing service, which prioritizes submitted service requests based on ranking formulas associated with each of the different service request classification types. Submitted requests are classified using the below classification rules.
+This project is a implementation of a restful priority queuing service, which prioritizes submitted service requests based on the different ranking formulas associated with each of the service request classification types. Submitted requests are classified according to the below classification rules.
 
 |    Classification Type      |     Rule     |
 | ---------------------------- | --------------------------- |
@@ -10,7 +10,7 @@ This project is a implementation of a restful queuing service, which prioritizes
 |           VIP                |     ids evenly divisible by 5        |
 |        Management            |   ids evenly divisible by 3 and 5    |
 
-The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Note that Management requests will be ranked ahead of all non management requests which are all ranked amongst themselves according to a function of time seconds in the queue.
+The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Note that Management requests will always be prioritised ahead of all non management requests. 
 
 |    Classification Type      |       Formula       |
 | ---------------------------- | --------------------------- |
