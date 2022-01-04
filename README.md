@@ -27,7 +27,7 @@ This application is a Springboot application packaged as a jar containing an emb
 * JDK 11.0.12+
 * Maven 3.0+
 
-## How to Run 
+### How to Run 
 1. Clone this repository 
 2. Build the project and run the tests by running 
 ```mvn clean package```
@@ -41,7 +41,7 @@ mvn spring-boot:run
 ```
 4. Check the stdout to make sure no exceptions are thrown
 
-### REST APIs Endpoints
+## REST APIs Endpoints
 
 #### To view Swagger 2 API docs
 Run the server and browse to localhost:8090/swagger-ui.html
