@@ -1,7 +1,7 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
 # WORK ORDER API SERVICE 
-This application is a Springboot application which is packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
+This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
 
 ## SUMMARY
 This project is a implementation of a work order queuing service which prioritizes submitted service requests based on different ranking formulas associated with the service request classification type. Submitted work orders can be of four different classification types `Normal, Priority, VIP, and Management Override` derived based on the following rules associated with the id value.
