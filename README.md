@@ -46,7 +46,7 @@ mvn spring-boot:run
 2022-01-04 12:28:49.515  INFO 2209 --- [  restartedMain] c.a.w.WorkOrderApiApplication            : Started WorkOrderApiApplication in 8.305 seconds (JVM running for 8.639)
 ```
 ## REST APIs Endpoints
-### Enqueue service request
+### Enqueue
 Endpoint for submitting a new service request onto the Queue
 #### Sample Request
 ```
@@ -68,7 +68,7 @@ Content-Type: application/json
    "type": "PRIORITY"
 }
 ```
-### Dequeue service request
+### Dequeue
 Endpoint for dequeuing the next highest priority service request from the Queue
 #### Request
 ```
@@ -87,7 +87,7 @@ Content-Type: application/json
    "rank": 3986.4260763842653
 }
 ```
-### List Service Request Ids
+### List Ids
 Endpoint which lists the ids of all queued service requests sorted in priority ranking order
 #### Request
 ```
@@ -103,7 +103,7 @@ Content-Type: application/json
    "workOrderIds": [15,5,10,3,6,9,12,1,2,4,7,8,11,13,14]
 }
 ```
-### Get Service Request Queue Position
+### Get Queue Position
 Endpoint for getting the position of a service request with a given requestorId in the queue 
 #### Request
 ```
