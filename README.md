@@ -19,9 +19,11 @@ The priority queue is sorted based on different ranking formulas associated with
 |           VIP                |        max(4, 2n * ln(n))   |
 |    Management Override       |       # secs in queue       |
 
-## Requirements
+## Getting Started
 This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
-* Git
+
+### Requirements
+* Git client
 * JDK 11.0.12+
 * Maven 3.0+
 
