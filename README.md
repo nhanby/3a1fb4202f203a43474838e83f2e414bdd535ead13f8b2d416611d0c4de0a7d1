@@ -1,7 +1,7 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
 # SERVICE REQUEST PRIORITY QUEUING SERVICE 
-This project is a implementation of a Restful queuing service, which prioritizes submitted service requests based on ranking formulas associated with each of the different service request classification types. Submitted requests are classified using the below classification rules.
+This project is a implementation of a restful queuing service, which prioritizes submitted service requests based on ranking formulas associated with each of the different service request classification types. Submitted requests are classified using the below classification rules.
 
 |    Classification Type      |     Rule     |
 | ---------------------------- | --------------------------- |
@@ -20,7 +20,7 @@ The priority queue is sorted based on different ranking formulas associated with
 |        Management            |       # secs in queue       |
 
 ## Getting Started
-This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
+This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier was implemented using an embedded H2 in-memory database, therefore submitted service request data won't be persisted across application restarts. 
 
 ### Requirements
 * Git client
@@ -45,9 +45,9 @@ mvn spring-boot:run
 2022-01-04 12:28:49.507  INFO 2209 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8443 (https) with context path ''
 2022-01-04 12:28:49.515  INFO 2209 --- [  restartedMain] c.a.w.WorkOrderApiApplication            : Started WorkOrderApiApplication in 8.305 seconds (JVM running for 8.639)
 ```
-
 ## REST APIs Endpoints
-### Enqueue a service request
+### Enqueue service request
+Endpoint for submitting a new service request onto the Queue
 ```
 POST /api/v1/workorders/enqueue
 Accept: application/json
@@ -55,6 +55,35 @@ Content-Type: application/json
 
 { "requestorId": "6", "timeAdded": "2021-12-29T17:03:45"} 
 ```
-
+### Dequeue service request
+Endpoint for dequeuing the next highest priority service request from the Queue
+```
+POST /api/v1/workorders/dequeue
+Accept: application/json
+```
+### List Service Request Ids
+Endpoint which lists the ids of all queued service requests sorted in priority ranking order
+```
+GET /api/v1/workorders/listids
+Accept: application/json
+```
+### Get Service Request Queue Position
+Endpoint for getting the position of a service request with a given requestorId in the queue 
+```
+GET /api/v1/workorders/position/6
+Accept: application/json
+```
+### Delete Service Request
+Endpoint for deleting a service request with a given requestorId from the queue 
+```
+DELETE /api/v1/workorders/6
+Accept: application/json
+```
+### Get Average Wait Time
+Endpoint which calculates the average (mean) wait time that service requests have been waiting in the queue based on a given currentTime value.
+```
+GET /api/v1/workorders/avgWaitTime/2021-12-29T17:03:45
+Accept: application/json
+```
 #### To view Swagger 2 API docs
 Run the server and browse to localhost:8090/swagger-ui.html
