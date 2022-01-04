@@ -47,8 +47,9 @@ mvn spring-boot:run
 ```
 
 ## REST APIs Endpoints
-### Enqueue a service Request
-```POST /api/v1/workorders/enqueue
+### Enqueue a service request
+```
+POST /api/v1/workorders/enqueue
 Accept: application/json
 Content-Type: application/json
 
