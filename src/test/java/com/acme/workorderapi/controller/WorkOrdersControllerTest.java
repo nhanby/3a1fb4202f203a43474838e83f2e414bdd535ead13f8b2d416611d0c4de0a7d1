@@ -204,5 +204,26 @@ class WorkOrdersControllerTest {
 		mockMvc.perform(delete(TestConstants.WORK_ORDER_URL, 1)
 				.accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isNoContent());
-	}	
+	}
+
+	@Test
+	void givenGetAverageWaitTime_whenEmpty_shouldReturnZero() throws Exception {
+		String currentTime = LocalDateTime.now().format(TestConstants.DATE_FORMATTER);
+		given(workOrderQueueService.getAverageWaitTime(any())).willReturn(0L);
+		mockMvc.perform(get(TestConstants.GET_AVERAGE_WAIT_TIME_URL, currentTime)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("averageWaitTime").value("0"));
+	}
+	
+	@Test
+	void givenGetAverageWaitTime_whenNonEmpty_shouldReturnNonZero() throws Exception {
+		String currentTime = LocalDateTime.now().format(TestConstants.DATE_FORMATTER);
+		given(workOrderQueueService.getAverageWaitTime(any())).willReturn(100L);
+		mockMvc.perform(get(TestConstants.GET_AVERAGE_WAIT_TIME_URL, currentTime)
+				.accept(MediaType.APPLICATION_JSON))
+		.andExpect(status().isOk())
+		.andExpect(jsonPath("averageWaitTime").value("100"));
+	}
+	
 }

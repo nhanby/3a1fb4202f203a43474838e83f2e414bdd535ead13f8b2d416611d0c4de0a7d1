@@ -166,7 +166,7 @@ class WorkOrderApiIntegrationTests {
 		createWorkOrder("6", currentTime.minusSeconds(100));
 		createWorkOrder("7", currentTime.minusSeconds(200));		
 
-		String currentTimeStr = currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+		String currentTimeStr = currentTime.format(TestConstants.DATE_FORMATTER);
 		ResponseEntity<AverageWaitTimeResponse> averageWaitTimeResponse = restTemplate
 				.getForEntity(TestConstants.GET_AVERAGE_WAIT_TIME_URL, AverageWaitTimeResponse.class, currentTimeStr);
 		assertThat(averageWaitTimeResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
