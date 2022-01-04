@@ -12,7 +12,7 @@ spring:
     password: password
     driverClassName: org.h2.Driver
   h2:
-    console.enabled: true
+    console.enabled: false
   jpa:
     show-sql: false
     properties:
@@ -22,5 +22,4 @@ spring:
     serialization:
       INDENT_OUTPUT : true
     deserialization:
-      ACCEPT_FLOAT_AS_INT : false    
-##TODO implement swagger
+      ACCEPT_FLOAT_AS_INT : false
