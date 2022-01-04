@@ -10,7 +10,7 @@ This project is a implementation of a Restful queuing service, which prioritizes
 |           VIP                |     ids evenly divisible by 5        |
 |        Management            |   ids evenly divisible by 3 and 5    |
 
-The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Management requests will be ranked ahead of all non management override requests and are ranked amongst themselves according to the number of seconds in the queue.
+The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Note that Management requests will be ranked ahead of all non management requests which are all ranked amongst themselves according to a function of time seconds in the queue.
 
 |    Classification Type      |       Formula       |
 | ---------------------------- | --------------------------- |
