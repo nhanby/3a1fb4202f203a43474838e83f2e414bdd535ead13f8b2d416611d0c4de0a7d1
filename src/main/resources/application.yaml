@@ -22,14 +22,5 @@ spring:
     serialization:
       INDENT_OUTPUT : true
     deserialization:
-      ACCEPT_FLOAT_AS_INT : false
-logging:
-    level:
-        org: 
-           hibernate:
-              SQL: DEBUG
-              type:
-                  descriptor:
-                      sql: 
-                         BasicBinder: trace     
+      ACCEPT_FLOAT_AS_INT : false    
 ##TODO implement swagger
