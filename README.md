@@ -1,7 +1,7 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
 # SERVICE REQUEST PRIORITY QUEUING SERVICE 
-## Getting Started
+### Getting Started
 This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier was implemented using an embedded H2 in-memory database, therefore submitted service request data won't be persisted across application restarts. 
 
 ### Requirements
