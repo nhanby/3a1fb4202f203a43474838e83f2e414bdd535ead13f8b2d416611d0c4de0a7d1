@@ -90,21 +90,28 @@ Accept: application/json
 #### Sample Response
 ```
 {
-	"workOrderIds": [15,5,10,3,6,9,12,1,2,4,7,8,11,13,14]
+   "workOrderIds": [15,5,10,3,6,9,12,1,2,4,7,8,11,13,14]
 }
 ```
 ### Get Service Request Queue Position
 Endpoint for getting the position of a service request with a given requestorId in the queue 
+#### Sample Request
 ```
 GET /api/v1/workorders/position/6
 Accept: application/json
 ```
+#### Sample Response
+{
+   "position": 2
+}
 ### Delete Service Request
 Endpoint for deleting a service request with a given requestorId from the queue 
+#### Sample Request
 ```
 DELETE /api/v1/workorders/6
 Accept: application/json
 ```
+#### Sample Response
 ### Get Average Wait Time
 Endpoint which calculates the average (mean) wait time that service requests have been waiting in the queue based on a given currentTime value.
 ```
