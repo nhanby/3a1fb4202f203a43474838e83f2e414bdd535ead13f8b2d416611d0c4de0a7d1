@@ -24,6 +24,7 @@ import com.acme.workorderapi.AppConstants;
 import com.acme.workorderapi.domain.WorkOrderEntity;
 import com.acme.workorderapi.domain.WorkOrderRepository;
 import com.acme.workorderapi.exception.EmptyQueueException;
+import com.acme.workorderapi.exception.WorkOrderAlreadyExistsException;
 import com.acme.workorderapi.exception.WorkOrderNotFoundException;
 import com.acme.workorderapi.utils.TestUtils;
 
@@ -49,7 +50,7 @@ class WorkOrderServiceImplTest {
 	}
 
 	@Test
-	void dequeueWorkOrder_whenEmpty_returnsAndDeletesHighestPriorityWorkOrder() {
+	void dequeueWorkOrder_whenEmpty_throwsEmptyQueueException() {
 		given(workOrderRepository.getHighestPriorityWorkOrder()).willReturn(null);
 
 		assertThatThrownBy(() -> this.workOrderService.dequeue())
@@ -58,11 +59,21 @@ class WorkOrderServiceImplTest {
 	}
 
 	@Test
-	void enqueueWorkOrder_returnsNewlyAddedWorkOrder() {
+	void enqueueWorkOrder_whenNotExists_returnsNewlyAddedWorkOrder() {
 		WorkOrderEntity workOrderToEnqueue = TestUtils.createWorkOrderEntity(1L, LocalDateTime.now());
 		given(workOrderRepository.save(Mockito.any(WorkOrderEntity.class))).willReturn(workOrderToEnqueue);
 		WorkOrderEntity enqueuedWorkOrder = this.workOrderService.enqueue(workOrderToEnqueue);
 		assertThat(enqueuedWorkOrder).isEqualTo(workOrderToEnqueue);
+	}
+	
+	@Test
+	void enqueueWorkOrder_whenAlreadyExists_throwsWorkOrderAlreadyExistsException() {
+		WorkOrderEntity workOrderToEnqueue = TestUtils.createWorkOrderEntity(1L, LocalDateTime.now());
+		given(workOrderRepository.existsById(Mockito.any(Long.class))).willReturn(true);
+		
+		assertThatThrownBy(() -> this.workOrderService.enqueue(workOrderToEnqueue))
+		      .isInstanceOf(WorkOrderAlreadyExistsException.class)
+		      .hasMessage(AppConstants.WORK_ORDER_ALREADY_EXISTS_ERROR_MSG);
 	}
 
 	@Test
