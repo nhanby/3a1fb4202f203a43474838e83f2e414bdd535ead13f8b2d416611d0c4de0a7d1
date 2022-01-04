@@ -47,6 +47,13 @@ mvn spring-boot:run
 ```
 
 ## REST APIs Endpoints
+### Enqueue a service Request
+```POST /api/v1/workorders/enqueue
+Accept: application/json
+Content-Type: application/json
+
+{ "requestorId": "6", "timeAdded": "2021-12-29T17:03:45"} 
+```
 
 #### To view Swagger 2 API docs
 Run the server and browse to localhost:8090/swagger-ui.html
