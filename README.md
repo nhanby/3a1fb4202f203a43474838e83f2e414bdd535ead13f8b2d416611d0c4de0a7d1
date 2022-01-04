@@ -27,7 +27,7 @@ mvn spring-boot:run
 2022-01-04 12:28:49.507  INFO 2209 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8443 (https) with context path ''
 2022-01-04 12:28:49.515  INFO 2209 --- [  restartedMain] c.a.w.WorkOrderApiApplication            : Started WorkOrderApiApplication in 8.305 seconds (JVM running for 8.639)
 ```
-## SUMMARY
+## PROJECT SUMMARY
 This project is a implementation of a restful priority queuing service, which prioritizes submitted service requests based on the different ranking formulas associated with each of the service request classification types. Submitted requests are classified according to the below classification rules.
 
 |    Classification Type      |     Rule     |
