@@ -3,7 +3,7 @@
 # WORK ORDER API SERVICE 
 This project is a implementation of a Restful queuing service, which prioritizes submitted service requests based on ranking formulas associated with each of the different service request classification types. Submitted work orders are classified using the below classification rules.
 
-|    Classification       |     Rule     |
+|    Classification Type      |     Rule     |
 | ---------------------------- | --------------------------- |
 |         Priority             |          ids % by 3         |
 |           VIP                |          ids % by 5         |
@@ -12,7 +12,7 @@ This project is a implementation of a Restful queuing service, which prioritizes
 
 The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Management override requests will be ranked ahead of all non management override requests and are ranked amongst themselves according to the number of seconds in the queue.
 
-|    Classification       |       Formula       |
+|    Classification Type      |       Formula       |
 | ---------------------------- | --------------------------- |
 |          Normal              |       # secs in queue       |
 |         Priority             |        max(3, n * ln(n))    
