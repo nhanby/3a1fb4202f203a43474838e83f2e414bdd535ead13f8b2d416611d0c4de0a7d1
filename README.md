@@ -34,9 +34,9 @@ This application is a Springboot application packaged as a jar containing an emb
 3. Once successfully built, you can run the service by one of these two methods:
 ```
 java -jar target/workorderapi-0.0.1-SNAPSHOT.jar
-
+```
 or
-
+```
 mvn spring-boot:run
 ```
 4. Check the stdout to make sure no exceptions are thrown
