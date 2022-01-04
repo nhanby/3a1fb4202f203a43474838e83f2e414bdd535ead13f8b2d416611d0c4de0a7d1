@@ -70,13 +70,16 @@ Content-Type: application/json
 ```
 ### Dequeue service request
 Endpoint for dequeuing the next highest priority service request from the Queue
-#### Sample Request
+#### Request
 ```
 POST /api/v1/workorders/dequeue
 Accept: application/json
 ```
-#### Sample Response
+#### Response
 ```
+HTTP/1.1 200 
+Content-Type: application/json
+
 {
    "requestorId": 9,
    "timeAdded": "2022-01-01T23:30:38.426389",
@@ -86,50 +89,59 @@ Accept: application/json
 ```
 ### List Service Request Ids
 Endpoint which lists the ids of all queued service requests sorted in priority ranking order
-#### Sample Request
+#### Request
 ```
 GET /api/v1/workorders/listids
 Accept: application/json
 ```
-#### Sample Response
+#### Response
 ```
+HTTP/1.1 200
+Content-Type: application/json
+
 {
    "workOrderIds": [15,5,10,3,6,9,12,1,2,4,7,8,11,13,14]
 }
 ```
 ### Get Service Request Queue Position
 Endpoint for getting the position of a service request with a given requestorId in the queue 
-#### Sample Request
+#### Request
 ```
 GET /api/v1/workorders/position/6
 Accept: application/json
 ```
-#### Sample Response
+#### Response
 ```
+HTTP/1.1 200 
+Content-Type: application/json
+
 {
    "position": 2
 }
 ```
 ### Delete Service Request
 Endpoint for deleting a service request with a given requestorId from the queue 
-#### Sample Request
+#### Request
 ```
 DELETE /api/v1/workorders/6
 Accept: application/json
 ```
-#### Sample Response
+#### Response
 ```
 HTTP/1.1 204
 ```
 ### Get Average Wait Time
 Endpoint which calculates the average (mean) wait time that service requests have been waiting in the queue based on a given currentTime value.
-#### Sample Request
+#### Request
 ```
 GET /api/v1/workorders/avgWaitTime/2021-12-29T17:03:45
 Accept: application/json
 ```
-#### Sample Response
+#### Response
 ```
+HTTP/1.1 200 
+Content-Type: application/json
+
 {
    "averageWaitTime": 514316
 }
