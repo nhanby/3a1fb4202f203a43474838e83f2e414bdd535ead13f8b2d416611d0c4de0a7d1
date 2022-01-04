@@ -48,6 +48,7 @@ mvn spring-boot:run
 ## REST APIs Endpoints
 ### Enqueue service request
 Endpoint for submitting a new service request onto the Queue
+#### Sample Request
 ```
 POST /api/v1/workorders/enqueue
 Accept: application/json
@@ -57,7 +58,7 @@ Content-Type: application/json
 ```
 ### Dequeue service request
 Endpoint for dequeuing the next highest priority service request from the Queue
-####Sample Request
+#### Sample Request
 ```
 POST /api/v1/workorders/dequeue
 Accept: application/json
