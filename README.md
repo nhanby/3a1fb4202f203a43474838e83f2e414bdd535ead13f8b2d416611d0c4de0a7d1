@@ -101,9 +101,11 @@ GET /api/v1/workorders/position/6
 Accept: application/json
 ```
 #### Sample Response
+```
 {
    "position": 2
 }
+```
 ### Delete Service Request
 Endpoint for deleting a service request with a given requestorId from the queue 
 #### Sample Request
