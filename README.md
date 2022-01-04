@@ -116,9 +116,16 @@ Accept: application/json
 #### Sample Response
 ### Get Average Wait Time
 Endpoint which calculates the average (mean) wait time that service requests have been waiting in the queue based on a given currentTime value.
+#### Sample Request
 ```
 GET /api/v1/workorders/avgWaitTime/2021-12-29T17:03:45
 Accept: application/json
+```
+#### Sample Response
+```
+{
+	"averageWaitTime": 514316
+}
 ```
 #### To view Swagger 2 API docs
 Run the server and browse to localhost:8090/swagger-ui.html
