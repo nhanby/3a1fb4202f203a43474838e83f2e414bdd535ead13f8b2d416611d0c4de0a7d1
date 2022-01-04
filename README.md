@@ -1,6 +1,36 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
 # SERVICE REQUEST PRIORITY QUEUING SERVICE 
+### Getting Started
+This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier was implemented using an embedded H2 in-memory database, therefore submitted service request data won't be persisted across application restarts. 
+
+### Requirements
+* Git client
+* JDK 11.0.12+
+* Maven 3.0+
+
+### How to Run 
+1. Clone this repository 
+```
+git clone https://github.com/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1.git
+```
+3. Build the project and run the tests by running 
+```mvn clean package```
+3. Once successfully built, you can run the service by one of these two methods:
+```
+java -jar target/workorderapi-0.0.1-SNAPSHOT.jar
+```
+or
+```
+mvn spring-boot:run
+```
+4. Check the stdout to make sure no exceptions are thrown
+5. If the application is succesfully started you should see the following output
+```
+2022-01-04 12:28:49.507  INFO 2209 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8443 (https) with context path ''
+2022-01-04 12:28:49.515  INFO 2209 --- [  restartedMain] c.a.w.WorkOrderApiApplication            : Started WorkOrderApiApplication in 8.305 seconds (JVM running for 8.639)
+```
+## PROJECT SUMMARY
 This project is a implementation of a restful priority queuing service, which prioritizes submitted service requests based on the different ranking formulas associated with each of the service request classification types. Submitted requests are classified according to the below classification rules.
 
 |    Classification Type      |     Rule     |
@@ -18,33 +48,6 @@ The priority queue is sorted based on different ranking formulas associated with
 |         Priority             |        max(3, n * ln(n))    |
 |           VIP                |        max(4, 2n * ln(n))   |
 |        Management            |       # secs in queue       |
-
-## Getting Started
-This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier was implemented using an embedded H2 in-memory database, therefore submitted service request data won't be persisted across application restarts. 
-
-### Requirements
-* Git client
-* JDK 11.0.12+
-* Maven 3.0+
-
-### How to Run 
-1. Clone this repository 
-2. Build the project and run the tests by running 
-```mvn clean package```
-3. Once successfully built, you can run the service by one of these two methods:
-```
-java -jar target/workorderapi-0.0.1-SNAPSHOT.jar
-```
-or
-```
-mvn spring-boot:run
-```
-4. Check the stdout to make sure no exceptions are thrown
-5. If the application is succesfully started you should see the following output
-```
-2022-01-04 12:28:49.507  INFO 2209 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8443 (https) with context path ''
-2022-01-04 12:28:49.515  INFO 2209 --- [  restartedMain] c.a.w.WorkOrderApiApplication            : Started WorkOrderApiApplication in 8.305 seconds (JVM running for 8.639)
-```
 ## REST APIs Endpoints
 ### Enqueue
 Endpoint for submitting a new service request onto the Queue
@@ -146,5 +149,5 @@ Content-Type: application/json
    "averageWaitTime": 514316
 }
 ```
-#### To view Swagger 2 API docs
-Run the server and browse to localhost:8090/swagger-ui.html
+#### To view Swagger 3 API docs
+Run the server and browse to https://localhost:8443/swagger-ui.html
