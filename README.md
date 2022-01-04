@@ -114,6 +114,9 @@ DELETE /api/v1/workorders/6
 Accept: application/json
 ```
 #### Sample Response
+```
+HTTP/1.1 204
+```
 ### Get Average Wait Time
 Endpoint which calculates the average (mean) wait time that service requests have been waiting in the queue based on a given currentTime value.
 #### Sample Request
