@@ -153,10 +153,10 @@ Content-Type: application/json
 #### To view Swagger 3 API docs
 Run the server and browse to https://localhost:8443/swagger-ui.html
 ## Future Enhancements
-* Extend exception handling to override framework exceptions to ensure implementation details aren't being leaked to client applications
+* Extend exception handling capabilities to override framework generated error responses to ensure that implementation details aren't accidently leaked to clients
 * Add logging to capture expected client exceptions 4xx as warnings (since these are expected scenarios) and all unexpected exceptions as errors (since these will need to be triaged)
-* Implement Http Basic or oAUTH (recommended) API security mechanism depending on requirements
-* Externalize secrets contained within the application configuration files
+* Implement oAUTH (recommended) or Http Basic API security mechanism depending on requirements
+* Externalize secrets contained within the application configuration files and remove from repo
 * Implement transaction management feature within the application to ensure the consistency of data is maintained as system is scaled
 * Containerize the application
 * Integrate spring actuator feature to enable monitoring integration capabilities
