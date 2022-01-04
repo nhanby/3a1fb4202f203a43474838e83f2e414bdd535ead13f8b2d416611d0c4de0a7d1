@@ -124,7 +124,7 @@ Accept: application/json
 #### Sample Response
 ```
 {
-	"averageWaitTime": 514316
+   "averageWaitTime": 514316
 }
 ```
 #### To view Swagger 2 API docs
