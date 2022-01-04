@@ -77,7 +77,7 @@ class WorkOrderServiceImplTest {
 	}
 
 	@Test
-	void listIds_whenNotEmpty_returnsPrioritisedListOfWorkOrderIds() {
+	void listIds_whenQueueNotEmpty_returnsPrioritisedListOfWorkOrderIds() {
 		WorkOrderEntity expectedWorkOrder1 = TestUtils.createWorkOrderEntity(1L, LocalDateTime.now());
 		WorkOrderEntity expectedWorkOrder2 = TestUtils.createWorkOrderEntity(2L, LocalDateTime.now());
 
@@ -92,7 +92,7 @@ class WorkOrderServiceImplTest {
 	}
 	
 	@Test
-	void listIds_whenEmpty_returnsPrioritisedListOfWorkOrderIds() {
+	void listIds_whenQueueEmpty_returnsEmptyList() {
 		given(workOrderRepository.getPrioritisedWorkOrders()).willReturn(Collections.emptyList());
 		Collection<Long> workOrderIds = this.workOrderService.listIds();
 		assertThat(workOrderIds)
@@ -148,7 +148,7 @@ class WorkOrderServiceImplTest {
 	}
 	
 	@Test
-	void getAverageWaitTime() {
+	void getAverageWaitTime_shouldReturnRetrievedAverageWaitTime() {
 		LocalDateTime currentTime = LocalDateTime.now();
 		given(workOrderRepository.getAverageWaitTime(any(LocalDateTime.class))).willReturn(100L);
 		
