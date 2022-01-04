@@ -1,23 +1,6 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
 # SERVICE REQUEST PRIORITY QUEUING SERVICE 
-This project is a implementation of a restful priority queuing service, which prioritizes submitted service requests based on the different ranking formulas associated with each of the service request classification types. Submitted requests are classified according to the below classification rules.
-
-|    Classification Type      |     Rule     |
-| ---------------------------- | --------------------------- |
-|          Normal              |  ids not evenly divisible by 3 or 5  |
-|         Priority             |     ids evenly divisible by 3        |
-|           VIP                |     ids evenly divisible by 5        |
-|        Management            |   ids evenly divisible by 3 and 5    |
-
-The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Note that Management requests will always be prioritised ahead of all non management requests. 
-
-|    Classification Type      |       Formula       |
-| ---------------------------- | --------------------------- |
-|          Normal              |       # secs in queue       |
-|         Priority             |        max(3, n * ln(n))    |
-|           VIP                |        max(4, 2n * ln(n))   |
-|        Management            |       # secs in queue       |
 
 ## Getting Started
 This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier was implemented using an embedded H2 in-memory database, therefore submitted service request data won't be persisted across application restarts. 
@@ -45,6 +28,24 @@ mvn spring-boot:run
 2022-01-04 12:28:49.507  INFO 2209 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8443 (https) with context path ''
 2022-01-04 12:28:49.515  INFO 2209 --- [  restartedMain] c.a.w.WorkOrderApiApplication            : Started WorkOrderApiApplication in 8.305 seconds (JVM running for 8.639)
 ```
+## Overview
+This project is a implementation of a restful priority queuing service, which prioritizes submitted service requests based on the different ranking formulas associated with each of the service request classification types. Submitted requests are classified according to the below classification rules.
+
+|    Classification Type      |     Rule     |
+| ---------------------------- | --------------------------- |
+|          Normal              |  ids not evenly divisible by 3 or 5  |
+|         Priority             |     ids evenly divisible by 3        |
+|           VIP                |     ids evenly divisible by 5        |
+|        Management            |   ids evenly divisible by 3 and 5    |
+
+The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Note that Management requests will always be prioritised ahead of all non management requests. 
+
+|    Classification Type      |       Formula       |
+| ---------------------------- | --------------------------- |
+|          Normal              |       # secs in queue       |
+|         Priority             |        max(3, n * ln(n))    |
+|           VIP                |        max(4, 2n * ln(n))   |
+|        Management            |       # secs in queue       |
 ## REST APIs Endpoints
 ### Enqueue
 Endpoint for submitting a new service request onto the Queue
