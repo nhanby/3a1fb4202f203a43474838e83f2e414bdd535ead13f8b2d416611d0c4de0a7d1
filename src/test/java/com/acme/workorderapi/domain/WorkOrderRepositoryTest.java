@@ -32,14 +32,15 @@ class WorkOrderRepositoryTest {
 	
 	@Test
 	void getNextHighestPriorityWorkOrder_whenNormalRequests_thenShouldReturnHighestPriorityWorkOrder() {
-		tem.persistAndFlush(TestUtils.createWorkOrderEntity(1, LocalDateTime.now().minusSeconds(50)));
+		LocalDateTime currentTime = LocalDateTime.now();
+		tem.persistAndFlush(TestUtils.createWorkOrderEntity(1, currentTime.minusSeconds(50)));
 		tem.clear();
 		
 		WorkOrderEntity actual = this.woRepository.getHighestPriorityWorkOrder();
 		assertThat(actual.getId()).isEqualTo(1);
 		assertThat(actual.getRank()).isEqualTo(50);
 		
-		tem.persistAndFlush(TestUtils.createWorkOrderEntity(2, LocalDateTime.now().minusSeconds(100)));
+		tem.persistAndFlush(TestUtils.createWorkOrderEntity(2, currentTime.minusSeconds(100)));
 		tem.clear();
 		
 		actual = this.woRepository.getHighestPriorityWorkOrder();
@@ -49,14 +50,15 @@ class WorkOrderRepositoryTest {
 	
 	@Test
 	void getNextHighestPriorityWorkOrder_whenPriorityRequests_thenShouldReturnHighestPriorityWorkOrder() {
-		tem.persistAndFlush(TestUtils.createWorkOrderEntity(3, LocalDateTime.now()));
+		LocalDateTime currentTime = LocalDateTime.now();
+		tem.persistAndFlush(TestUtils.createWorkOrderEntity(3, currentTime));
 		tem.clear();
 		
 		WorkOrderEntity actual = this.woRepository.getHighestPriorityWorkOrder();
 		assertThat(actual.getId()).isEqualTo(3);
 		assertThat(actual.getRank()).isEqualTo(3);
 		
-		tem.persistAndFlush(TestUtils.createWorkOrderEntity(6, LocalDateTime.now().minusSeconds(100)));
+		tem.persistAndFlush(TestUtils.createWorkOrderEntity(6, currentTime.minusSeconds(100)));
 		tem.clear();
 		
 		actual = this.woRepository.getHighestPriorityWorkOrder();
@@ -66,14 +68,15 @@ class WorkOrderRepositoryTest {
 	
 	@Test
 	void getNextHighestPriorityWorkOrder_whenVIPRequests_thenShouldReturnHighestPriorityVIPWorkOrder() {
-		tem.persistAndFlush(TestUtils.createWorkOrderEntity(5, LocalDateTime.now()));
+		LocalDateTime currentTime = LocalDateTime.now();
+		tem.persistAndFlush(TestUtils.createWorkOrderEntity(5, currentTime));
 		tem.clear();
 		
 		WorkOrderEntity actual = this.woRepository.getHighestPriorityWorkOrder();
 		assertThat(actual.getId()).isEqualTo(5);
 		assertThat(actual.getRank()).isEqualTo(4);
 		
-		tem.persistAndFlush(TestUtils.createWorkOrderEntity(10, LocalDateTime.now().minusSeconds(100)));
+		tem.persistAndFlush(TestUtils.createWorkOrderEntity(10, currentTime.minusSeconds(100)));
 		tem.clear();
 		
 		actual = this.woRepository.getHighestPriorityWorkOrder();
@@ -82,15 +85,16 @@ class WorkOrderRepositoryTest {
 	}
 	
 	@Test
-	void getNextHighestPriorityWorkOrder_whenManagementOverride_thenShouldReturnManementOverrideWorkOrder() {
-		tem.persistAndFlush(TestUtils.createWorkOrderEntity(10, LocalDateTime.now().minusSeconds(100)));
+	void getNextHighestPriorityWorkOrder_whenManagementOverrideAdded_thenShouldReturnManagementOverideWorkOrder() {
+		LocalDateTime currentTime = LocalDateTime.now();
+		tem.persistAndFlush(TestUtils.createWorkOrderEntity(10, currentTime.minusSeconds(100)));
 		tem.clear();
 		
 		WorkOrderEntity actual = this.woRepository.getHighestPriorityWorkOrder();
 		assertThat(actual.getId()).isEqualTo(10);
 		assertThat(actual.getRank()).isEqualTo(2*100*Math.log(100));
 		
-		tem.persistAndFlush(TestUtils.createWorkOrderEntity(15, LocalDateTime.now().minusSeconds(100)));
+		tem.persistAndFlush(TestUtils.createWorkOrderEntity(15, currentTime.minusSeconds(100)));
 		tem.clear();
 		
 		actual = this.woRepository.getHighestPriorityWorkOrder();
@@ -134,17 +138,18 @@ class WorkOrderRepositoryTest {
 	
 	@Test
 	void getAverageWaitTime() {
-		Long avgWaitTime = this.woRepository.getAverageWaitTime(LocalDateTime.now());
+		LocalDateTime currentTime = LocalDateTime.now();
+		Long avgWaitTime = this.woRepository.getAverageWaitTime(currentTime);
 		assertThat(avgWaitTime).isZero();
 		
-		WorkOrderEntity workOrderToBePersisted = TestUtils.createWorkOrderEntity(1, LocalDateTime.now().minusSeconds(200));
+		WorkOrderEntity workOrderToBePersisted = TestUtils.createWorkOrderEntity(1, currentTime.minusSeconds(200));
 		tem.persistAndFlush(workOrderToBePersisted);
-		avgWaitTime = this.woRepository.getAverageWaitTime(LocalDateTime.now());
+		avgWaitTime = this.woRepository.getAverageWaitTime(currentTime);
 		assertThat(avgWaitTime).isBetween(200L, 201L);
 
-		workOrderToBePersisted = TestUtils.createWorkOrderEntity(2, LocalDateTime.now().minusSeconds(400));
+		workOrderToBePersisted = TestUtils.createWorkOrderEntity(2, currentTime.minusSeconds(400));
 		tem.persistAndFlush(workOrderToBePersisted);
-		avgWaitTime = this.woRepository.getAverageWaitTime(LocalDateTime.now());
+		avgWaitTime = this.woRepository.getAverageWaitTime(currentTime);
 		assertThat(avgWaitTime).isBetween(300L, 301L);	
 	}
 	
@@ -156,10 +161,11 @@ class WorkOrderRepositoryTest {
 
 	@Test
 	void getWorkOrderById_whenNotEmpty_shouldReturnOptionalWithWorkOrder() {
-		WorkOrderEntity workOrderToBePersisted = TestUtils.createWorkOrderEntity(1, LocalDateTime.now().minusSeconds(200));
+		LocalDateTime currentTime = LocalDateTime.now();
+		WorkOrderEntity workOrderToBePersisted = TestUtils.createWorkOrderEntity(1, currentTime.minusSeconds(200));
 		tem.persistAndFlush(workOrderToBePersisted);
 		
-		workOrderToBePersisted = TestUtils.createWorkOrderEntity(2, LocalDateTime.now().minusSeconds(400));
+		workOrderToBePersisted = TestUtils.createWorkOrderEntity(2, currentTime.minusSeconds(400));
 		tem.persistAndFlush(workOrderToBePersisted);
 		tem.clear();
 		
