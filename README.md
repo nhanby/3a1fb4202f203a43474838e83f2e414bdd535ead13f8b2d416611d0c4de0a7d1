@@ -1,32 +1,40 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
-# WORK ORDER API SERVICE SUMMARY
-This project is a implementation of a work order queuing service which automates the prioritization of submitted service requests. Submitted work orders can be of four different types `normal, priority, VIP, and management override` derived based on the following rules associated with the id value.
+# WORK ORDER API SERVICE 
+This application is a Springboot application which is packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
 
-1. IDs evenly divisible by 3 are priority IDs.
-2. IDs evenly divisible by 5 are VIP IDs.
-3. IDs evenly divisible by both 3 and 5 are management override IDs.
-4. IDs not evenly divisible by 3 or 5 are normal IDs.
+## SUMMARY
+This project is a implementation of a work order queuing service which prioritizes submitted service requests based on different ranking formulas associated with the service request classification type. Submitted work orders can be of four different classification types `Normal, Priority, VIP, and Management Override` derived based on the following rules associated with the id value.
 
-The priority queue is sorted based on the ranking formulas associated with the different work order classifications.
 
-1. Normal IDs are given a rank equal to the number of seconds they've been in the queue.
-2. Priority IDs are given a rank equal to the result of applying the following formula to the number of seconds they've been in the queue:
-max(3; n log n)
-3. VIP IDs are given a rank equal to the result of applying the following formula to the number of seconds they've been in the queue:
-max(4; 2n log n)
-4. Management Override IDs are always ranked ahead of all other IDs and are ranked among themselves according to the number of seconds they've been in the queue.
+|    Classification Type       |     Classification Rule     |
+| ---------------------------- | --------------------------- |
+|         Priority             |          ids % by 3         |
+|           VIP                |          ids % by 5         |
+|      Management Override     |       ids % by 3 and 5      |
+|          Normal              |       ids !% by 3 or 5      |     
 
-This application is a springboot application which is packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
+The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications.
+
+|    Classification Type       |       Ranking Formula       |
+| ---------------------------- | --------------------------- |
+|          Normal              |       # secs in queue       |
+|         Priority             |        max(3, n * ln(n))    |
+|           VIP                |        max(4, 2n * ln(n))   |
+|    Management Override       |       # secs in queue       |
+
+Note: Management override requests are ranked ahead of all non management override requests and are ranked amongst themselves according to the number of seconds in the queue.
+
 
 ## Requirements
 * Git
-* JDK JDK 11.0.12+
+* JDK 11.0.12+
 * Maven 3.0+
 
 ## How to Run 
 1. Clone this repository 
-2. Build the project and run the tests by running ```mvn clean package```
+2. Build the project and run the tests by running 
+```mvn clean package```
 3. Once successfully built, you can run the service by one of these two methods:
 ```
 java -jar target/workorderapi-0.0.1-SNAPSHOT.jar
