@@ -4,7 +4,7 @@
 ### Getting Started
 This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier was implemented using an embedded H2 in-memory database, therefore submitted service request data won't be persisted across application restarts. 
 
-### Requirements
+### Prerequisites
 * Git client
 * JDK 11.0.12+
 * Maven 3.0+
