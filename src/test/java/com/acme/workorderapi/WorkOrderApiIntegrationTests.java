@@ -5,6 +5,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,6 +17,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.acme.workorderapi.dto.AverageWaitTimeResponse;
 import com.acme.workorderapi.dto.ListIdsResponse;
 import com.acme.workorderapi.dto.QueuePositionResponse;
 import com.acme.workorderapi.dto.WorkOrderRequest;
@@ -85,7 +87,7 @@ class WorkOrderApiIntegrationTests {
 
 		ResponseEntity<ListIdsResponse> response = restTemplate.getForEntity(TestConstants.LIST_IDS_URL,
 				ListIdsResponse.class);
-		
+
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().getWorkOrderIds()).isNotEmpty().containsExactly(15L, 30L, 5L, 3L, 6L, 1L, 2L, 4L);
 	}
@@ -103,27 +105,27 @@ class WorkOrderApiIntegrationTests {
 
 		ResponseEntity<QueuePositionResponse> response = restTemplate.getForEntity(TestConstants.POSITION_URL,
 				QueuePositionResponse.class, 4);
-		
+
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().getPosition()).isEqualTo(7);
 
 		response = restTemplate.getForEntity(TestConstants.POSITION_URL, QueuePositionResponse.class, 1);
-		
+
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().getPosition()).isEqualTo(5);
 
 		response = restTemplate.getForEntity(TestConstants.POSITION_URL, QueuePositionResponse.class, 30);
-		
+
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().getPosition()).isEqualTo(1);
 
 		response = restTemplate.getForEntity(TestConstants.POSITION_URL, QueuePositionResponse.class, 15);
-		
+
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(response.getBody().getPosition()).isZero();
-		
+
 		response = restTemplate.getForEntity(TestConstants.POSITION_URL, QueuePositionResponse.class, 50);
-		
+
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 	}
 
@@ -133,23 +135,50 @@ class WorkOrderApiIntegrationTests {
 
 		ResponseEntity<WorkOrderResponse> getWorkOrderResponse = restTemplate.getForEntity(TestConstants.WORK_ORDER_URL,
 				WorkOrderResponse.class, 5);
-		
+
 		assertThat(getWorkOrderResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(getWorkOrderResponse.getBody().getRequestorId()).isEqualTo(5L);
-		
+
 		ResponseEntity<Void> deleteWorkOrderResponse = restTemplate.exchange(TestConstants.WORK_ORDER_URL,
 				HttpMethod.DELETE, null, Void.class, 5);
-		
+
 		assertThat(deleteWorkOrderResponse.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
-		getWorkOrderResponse = restTemplate.getForEntity(TestConstants.WORK_ORDER_URL,
-				WorkOrderResponse.class, 5);
-		
+		getWorkOrderResponse = restTemplate.getForEntity(TestConstants.WORK_ORDER_URL, WorkOrderResponse.class, 5);
+
 		assertThat(getWorkOrderResponse.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
 	}
 
+	@Test
+	void getAverageWaitTime_whenEmptyQueue_shouldReturnOkAndZeroAverageWaitTime() {
+		String currentTimeStr = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+
+		ResponseEntity<AverageWaitTimeResponse> averageWaitTimeResponse = restTemplate
+				.getForEntity(TestConstants.GET_AVERAGE_WAIT_TIME_URL, AverageWaitTimeResponse.class, currentTimeStr);
+
+		assertThat(averageWaitTimeResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(averageWaitTimeResponse.getBody().getAverageWaitTime()).isZero();
+	}
+
+	@Test
+	void getAverageWaitTime_whenNonEmptyQueue_shouldReturnOkAndNonZeroAverageWaitTime() {
+		LocalDateTime currentTime = LocalDateTime.now();
+		createWorkOrder("6", currentTime.minusSeconds(100));
+		createWorkOrder("7", currentTime.minusSeconds(200));		
+
+		String currentTimeStr = currentTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+		ResponseEntity<AverageWaitTimeResponse> averageWaitTimeResponse = restTemplate
+				.getForEntity(TestConstants.GET_AVERAGE_WAIT_TIME_URL, AverageWaitTimeResponse.class, currentTimeStr);
+		assertThat(averageWaitTimeResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+		assertThat(averageWaitTimeResponse.getBody().getAverageWaitTime()).isEqualTo(150);
+	}
+
 	private ResponseEntity<WorkOrderResponse> createWorkOrder(String requestorId) {
-		WorkOrderRequest request = new WorkOrderRequest(requestorId, LocalDateTime.now());
+		return createWorkOrder(requestorId, LocalDateTime.now());
+	}
+
+	private ResponseEntity<WorkOrderResponse> createWorkOrder(String requestorId, LocalDateTime timeAdded) {
+		WorkOrderRequest request = new WorkOrderRequest(requestorId, timeAdded);
 		return restTemplate.postForEntity(TestConstants.ENQUEUE_URL, request, WorkOrderResponse.class);
 	}
 }

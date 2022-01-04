@@ -13,9 +13,23 @@ spring:
     driverClassName: org.h2.Driver
   h2:
     console.enabled: true
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
   jackson:
     serialization:
       INDENT_OUTPUT : true
     deserialization:
       ACCEPT_FLOAT_AS_INT : false
+logging:
+    level:
+        org: 
+           hibernate:
+              SQL: DEBUG
+              type:
+                  descriptor:
+                      sql: 
+                         BasicBinder: trace     
 ##TODO implement swagger

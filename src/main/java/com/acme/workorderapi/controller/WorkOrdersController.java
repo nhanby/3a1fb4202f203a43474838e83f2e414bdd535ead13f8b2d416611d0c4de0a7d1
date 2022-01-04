@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import javax.validation.Valid;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -68,6 +69,12 @@ public class WorkOrdersController {
 		return WorkOrderMapper.mapToWorkOrderResponse(retrievedWorkOrder);
 	}
 
+	@GetMapping("/avgWaitTime/{currentTime}")
+	public AverageWaitTimeResponse getAverageWaitTime(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss") LocalDateTime currentTime) {
+		Long averageWaitTime = this.workOrdersService.getAverageWaitTime(currentTime);
+		return new AverageWaitTimeResponse(averageWaitTime);
+	}
+	
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteById(@PathVariable Long id) {
@@ -80,10 +87,6 @@ public class WorkOrdersController {
 		this.workOrdersService.deleteAll();
 	}
 
-	@GetMapping("/avgWaitTime/{currentTime}")
-	public AverageWaitTimeResponse getAverageWaitTime(LocalDateTime currentTime) {
-		Long averageWaitTime = this.workOrdersService.getAverageWaitTime(currentTime);
-		return new AverageWaitTimeResponse(averageWaitTime);
-	}
+
 
 }
