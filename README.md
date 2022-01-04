@@ -4,7 +4,7 @@
 This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
 
 ## SUMMARY
-This project is a implementation of a Restful queuing service, which prioritizes submitted service requests based on the below ranking formulas associated with each different service request classification type. Submitted work orders are classified based on the below classification rules.
+This project is a implementation of a Restful queuing service, which prioritizes submitted service requests based on ranking formulas associated with each of the different service request classification types. Submitted work orders are classified using the below classification rules.
 
 |    Classification Type       |     Classification Rule     |
 | ---------------------------- | --------------------------- |
