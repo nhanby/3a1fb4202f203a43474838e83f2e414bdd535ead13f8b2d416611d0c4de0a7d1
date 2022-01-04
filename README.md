@@ -4,14 +4,23 @@
 This application is a Springboot application packaged as a jar containing an embedded Tomcat 8 instance. For demo purposes the persistence tier has been implemented using an embedded H2 in-memory database, therefore submitted work order data will not be persisted across application restarts. 
 
 ## SUMMARY
-This project is a implementation of a work order queuing service which prioritizes submitted service requests based on different ranking formulas associated with the service request classification type. Submitted work orders can be of four different classification types `Normal, Priority, VIP, and Management Override` derived based on the following rules associated with the id value. The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Management override requests will be ranked ahead of all non management override requests and are ranked amongst themselves according to the number of seconds in the queue.
+This project is a implementation of a work order queuing service which prioritizes submitted service requests based on different ranking formulas associated with the service request classification type. Submitted work orders can be of four different classification types `Normal, Priority, VIP, and Management Override` derived based on the following rules associated with the id value. 
 
- |    Classification Type       |     Classification Rule     |  |    Classification Type       |       Ranking Formula       |
- | ---------------------------- | --------------------------- |  | ---------------------------- | --------------------------- |
- |         Priority             |          ids % by 3         |  |          Normal              |       # secs in queue       |
- |           VIP                |          ids % by 5         |  |         Priority             |        max(3, n * ln(n))    |
- |      Management Override     |       ids % by 3 and 5      |  |           VIP                |        max(4, 2n * ln(n))   |
- |          Normal              |       ids !% by 3 or 5      |  |    Management Override       |       # secs in queue       |     
+|    Classification Type       |     Classification Rule     |
+| ---------------------------- | --------------------------- |
+|         Priority             |          ids % by 3         |
+|           VIP                |          ids % by 5         |
+|      Management Override     |       ids % by 3 and 5      |
+|          Normal              |       ids !% by 3 or 5      |
+
+The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Management override requests will be ranked ahead of all non management override requests and are ranked amongst themselves according to the number of seconds in the queue.
+
+|    Classification Type       |       Ranking Formula       |
+| ---------------------------- | --------------------------- |
+|          Normal              |       # secs in queue       |
+|         Priority             |        max(3, n * ln(n))    
+|           VIP                |        max(4, 2n * ln(n))   |
+|    Management Override       |       # secs in queue       |
 
 ## Requirements
 * Git
