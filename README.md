@@ -14,7 +14,7 @@ This application is a Springboot application packaged as a jar containing an emb
 ```
 git clone https://github.com/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1.git
 ```
-3. Build the project and run the tests by running 
+2. Build the project and run the tests by running 
 ```mvn clean package```
 3. Once successfully built, you can run the service by one of these two methods:
 ```
