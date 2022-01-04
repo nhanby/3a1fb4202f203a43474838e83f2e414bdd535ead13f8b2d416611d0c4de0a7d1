@@ -146,5 +146,5 @@ Content-Type: application/json
    "averageWaitTime": 514316
 }
 ```
-#### To view Swagger 2 API docs
-Run the server and browse to localhost:8090/swagger-ui.html
+#### To view Swagger 3 API docs
+Run the server and browse to https://localhost:8443/swagger-ui.html
