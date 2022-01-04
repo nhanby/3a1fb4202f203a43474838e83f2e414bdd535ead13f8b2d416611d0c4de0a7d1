@@ -6,12 +6,12 @@ This application is a Springboot application packaged as a jar containing an emb
 ## SUMMARY
 This project is a implementation of a work order queuing service which prioritizes submitted service requests based on different ranking formulas associated with the service request classification type. Submitted work orders can be of four different classification types `Normal, Priority, VIP, and Management Override` derived based on the following rules associated with the id value. The priority queue is sorted based on different ranking formulas associated with each of the different work order classifications. Management override requests will be ranked ahead of all non management override requests and are ranked amongst themselves according to the number of seconds in the queue.
 
-|    Classification Type       |     Classification Rule     ||    Classification Type       |       Ranking Formula       |
-| ---------------------------- | --------------------------- || ---------------------------- | --------------------------- |
-|         Priority             |          ids % by 3         ||          Normal              |       # secs in queue       |
-|           VIP                |          ids % by 5         ||         Priority             |        max(3, n * ln(n))    |
-|      Management Override     |       ids % by 3 and 5      ||           VIP                |        max(4, 2n * ln(n))   |
-|          Normal              |       ids !% by 3 or 5      ||    Management Override       |       # secs in queue       |     
+|    Classification Type       |     Classification Rule     | |    Classification Type       |       Ranking Formula       |
+| ---------------------------- | --------------------------- | | ---------------------------- | --------------------------- |
+|         Priority             |          ids % by 3         | |          Normal              |       # secs in queue       |
+|           VIP                |          ids % by 5         | |         Priority             |        max(3, n * ln(n))    |
+|      Management Override     |       ids % by 3 and 5      | |           VIP                |        max(4, 2n * ln(n))   |
+|          Normal              |       ids !% by 3 or 5      | |    Management Override       |       # secs in queue       |     
 
 ## Requirements
 * Git
