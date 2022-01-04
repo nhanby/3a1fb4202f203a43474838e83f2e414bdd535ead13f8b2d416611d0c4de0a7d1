@@ -154,6 +154,8 @@ Content-Type: application/json
 ```
 #### To view Swagger 3 API docs
 Run the server and browse to https://localhost:8443/swagger-ui.html
+## Known Issues
+* java.security.NoSuchAlgorithmException: Algorithm HmacPBESHA256 not available error can be encountered on earlier versions of JVM11. Keystore was generated using JDK16 keytool which uses this algorithm as the default. Support for this algorithm was added post version 11.0.12 of the JDK. Please refer to https://bugs.openjdk.java.net/browse/JDK-8267701 for further details. 
 ## Future Enhancements
 * Extend exception handling capabilities to override framework generated error responses to ensure that implementation details aren't accidently leaked to clients
 * Add support for handling invalid time format being supplied in the averageWaitTime API request
