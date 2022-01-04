@@ -24,7 +24,7 @@ or
 ```
 mvn spring-boot:run
 ```
-4. Check the stdout to make sure no exceptions are thrown
+4. Check the stdout output to make sure no exceptions are thrown
 5. If the application is succesfully started you should see the following output
 ```
 2022-01-04 12:28:49.507  INFO 2209 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8443 (https) with context path ''
