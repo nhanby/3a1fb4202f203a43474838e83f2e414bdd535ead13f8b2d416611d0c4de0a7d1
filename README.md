@@ -1,6 +1,6 @@
 ![example workflow](https://img.shields.io/github/workflow/status/nhanby/3a1fb4202f203a43474838e83f2e414bdd535ead13f8b2d416611d0c4de0a7d1/work-order-service-ci-pipeline)
 
-# SERVICE REQUEST API SERVICE 
+# SERVICE REQUEST PRIORITY QUEUING SERVICE 
 This project is a implementation of a Restful queuing service, which prioritizes submitted service requests based on ranking formulas associated with each of the different service request classification types. Submitted requests are classified using the below classification rules.
 
 |    Classification Type      |     Rule     |
