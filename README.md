@@ -58,6 +58,10 @@ Content-Type: application/json
 ```
 #### Sample Response
 ```
+HTTP/1.1 201 
+Location: https://localhost:8443/api/v1/workorders/9
+Content-Type: application/json
+
 {
    "requestorId": 6,
    "timeAdded": "2021-12-29T17:03:45",
